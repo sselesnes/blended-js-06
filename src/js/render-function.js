@@ -1,4 +1,6 @@
 //Функцію для створення, рендеру або видалення розмітки
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 import { refs } from './refs';
 import { productsPerPage } from './constants';
 
@@ -13,6 +15,12 @@ export function renderProducts(data, page) {
   if (data.total > productsPerPage * page) {
     // console.log(`load more`);
     refs.loadMore.style.display = 'flex';
+  } else {
+    iziToast.info({
+      message: `We're sorry, but you've reached the end of search results.`,
+      position: 'topRight',
+      timeout: 2000,
+    });
   }
 }
 
@@ -20,9 +28,8 @@ function markupCategory(data) {
   return data
     .map(
       category =>
-        `<li class="categories__item">
-   <button class="categories__btn" type="button">${category}</button>
- </li>`
+        `<li class="categories__item"><button class="categories__btn" type="button">${category}</button>
+        </li>`
     )
     .join('');
 }

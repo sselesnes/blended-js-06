@@ -4,4 +4,5 @@ export const refs = {
   categories: document.querySelector('.categories'),
   products: document.querySelector('.products'),
   loadMore: document.querySelector('.load-more'),
+  body: document.querySelector('body'),
 };

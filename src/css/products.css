@@ -83,7 +83,7 @@
   }
 }
 .load-more {
-  display: flex;
+  display: none;
   justify-content: center;
 }
 .load-more-btn {
