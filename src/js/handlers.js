@@ -1,4 +1,5 @@
 // Функції, які передаються колбеками в addEventListners
+
 import { nextProductsPage, applyCategory } from './helpers';
 
 export const handlers = {
@@ -7,5 +8,9 @@ export const handlers = {
   },
   categoriesFilter: function (event) {
     applyCategory(event.target.textContent);
+  },
+  searchProduct: function (event) {
+    event.preventDefault();
+    console.log(event.target.elements.searchValue.value);
   },
 };

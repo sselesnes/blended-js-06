@@ -12,7 +12,8 @@ export const getCategories = async category => {
 
 export const getProducts = async (page, category) => {
   let categoryProps = '';
-  if (category) {
+  console.log(category);
+  if (category && category !== 'all') {
     categoryProps = `/category/${category}`;
   }
   const skip = (page - 1) * productsPerPage;

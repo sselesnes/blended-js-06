@@ -1,8 +1,14 @@
 //Функцію для створення, рендеру або видалення розмітки
+
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import { refs } from './refs';
 import { productsPerPage } from './constants';
+
+export function clearProducts() {
+  refs.loadMore.style.display = 'none';
+  refs.products.innerHTML = '';
+}
 
 export function renderCategories(data) {
   refs.categories.insertAdjacentHTML('beforeend', markupCategory(data));
@@ -11,16 +17,20 @@ export function renderCategories(data) {
 export function renderProducts(data, page) {
   refs.loadMore.style.display = 'none';
   refs.products.insertAdjacentHTML('beforeend', markupProducts(data.products));
-  //   console.log(data.total, productsPerPage * page);
+
+  console.log(data.total, productsPerPage * page);
+
+  // loadmore
   if (data.total > productsPerPage * page) {
-    // console.log(`load more`);
     refs.loadMore.style.display = 'flex';
   } else {
-    iziToast.info({
-      message: `We're sorry, but you've reached the end of search results.`,
-      position: 'topRight',
-      timeout: 2000,
-    });
+    if (page !== 1) {
+      iziToast.info({
+        message: `We're sorry, but you've reached the end of search results.`,
+        position: 'bottomCenter',
+        timeout: 2000,
+      });
+    }
   }
 }
 

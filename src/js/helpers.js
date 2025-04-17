@@ -1,10 +1,14 @@
 //Допоміжні функції
-import { refs } from './refs';
+
 import { getCategories, getProducts } from './products-api';
-import { renderCategories, renderProducts } from './render-function';
+import {
+  renderCategories,
+  renderProducts,
+  clearProducts,
+} from './render-function';
 
 let page = 16;
-let category = '';
+let category = 'all';
 
 export async function loadPage() {
   try {
@@ -19,7 +23,6 @@ export async function loadPage() {
 async function handleProducts() {
   try {
     const products = await getProducts(page, category);
-    // console.log(products);
     renderProducts(products, page);
   } catch (error) {
     console.log(error);
@@ -31,9 +34,9 @@ export function nextProductsPage() {
   handleProducts();
 }
 
-export function applyCategory(category) {
-  console.log(category);
+export function applyCategory(categorySelected) {
+  category = categorySelected;
   page = 1;
-
+  clearProducts();
   handleProducts();
 }
