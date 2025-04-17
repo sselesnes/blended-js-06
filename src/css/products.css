@@ -82,3 +82,14 @@
     color: #e05a00;
   }
 }
+.load-more {
+  display: flex;
+  justify-content: center;
+}
+.load-more-btn {
+  display: flex;
+  position: relative;
+  margin-top: 48px;
+  padding: 16px 32px;
+  align-items: center;
+}

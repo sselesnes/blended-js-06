@@ -1,6 +1,7 @@
 // Функції для роботи з бекендом
 
 import axios from 'axios';
+import { productsPerPage } from './constants';
 
 export const getCategories = async () => {
   const { data } = await axios.get(
@@ -10,9 +11,9 @@ export const getCategories = async () => {
 };
 
 export const getProducts = async (page = 1) => {
-  const skip = (page - 1) * 12;
+  const skip = (page - 1) * productsPerPage;
   const { data } = await axios.get(
-    `https://dummyjson.com/products?limit=12&skip=${skip}`
+    `https://dummyjson.com/products?limit=${productsPerPage}&skip=${skip}`
   );
   return data;
 };
