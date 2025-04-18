@@ -37,17 +37,16 @@ export function nextProductsPage() {
   handleProducts();
 }
 
-export function applyCategory(categorySelected) {
+export function applyFilter(categorySelected, searchFormQuery) {
+  if (searchFormQuery) {
+    searchQuery = searchFormQuery;
+    category = 'all';
+  }
+  if (categorySelected == category) {
+    return;
+  }
+  page = 1;
   category = categorySelected;
-  page = 1;
-  clearProducts();
-  handleProducts();
-}
-
-export function applyQuery(searchFormQuery) {
-  searchQuery = searchFormQuery;
-  category = 'all';
-  page = 1;
   clearProducts();
   handleProducts();
 }
