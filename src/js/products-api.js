@@ -14,7 +14,7 @@ export const getProducts = async (page, category, searchQuery) => {
   const skip = (page - 1) * productsPerPage;
   let props = `?limit=${productsPerPage}&skip=${skip}`;
 
-  console.log(page, category, searchQuery);
+  // console.log(page, category, searchQuery);
 
   if (category !== 'all') {
     props = `/category/${category}?limit=${productsPerPage}&skip=${skip}`;
@@ -26,7 +26,7 @@ export const getProducts = async (page, category, searchQuery) => {
     props = `/search?q=${searchQuery}`;
   }
 
-  console.log(props);
+  // console.log(props);
 
   const { data } = await axios.get(`https://dummyjson.com/products${props}`);
   return data;

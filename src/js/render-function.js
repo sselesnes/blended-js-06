@@ -18,7 +18,12 @@ export function renderProducts(data, page, searchQuery) {
   refs.loadMore.style.display = 'none';
   refs.products.insertAdjacentHTML('beforeend', markupProducts(data.products));
 
-  console.log(productsPerPage * page, data.total);
+  if (!data.total) refs.notFound.classList.add('not-found--visible');
+  else {
+    refs.notFound.classList.remove('not-found--visible');
+  }
+
+  //   console.log(productsPerPage * page, data.total);
 
   // loadmore behavior
   // dummyjson doesn`t support search pagination

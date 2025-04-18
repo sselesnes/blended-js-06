@@ -5,4 +5,5 @@ export const refs = {
   products: document.querySelector('.products'),
   loadMore: document.querySelector('.load-more'),
   searchForm: document.querySelector('.search-form'),
+  notFound: document.querySelector('.not-found'),
 };

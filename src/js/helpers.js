@@ -38,12 +38,12 @@ export function nextProductsPage() {
 }
 
 export function applyFilter(categorySelected, searchFormQuery) {
+  if (!searchFormQuery & (categorySelected == category)) {
+    return;
+  }
   if (searchFormQuery) {
     searchQuery = searchFormQuery;
     category = 'all';
-  }
-  if (categorySelected == category) {
-    return;
   }
   page = 1;
   category = categorySelected;
