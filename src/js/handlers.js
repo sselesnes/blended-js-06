@@ -5,7 +5,9 @@ import { refs } from './refs';
 
 export const handlers = {
   loadMore: function (event) {
-    nextProductsPage();
+    if (event.target.classList.contains('load-more-btn')) {
+      nextProductsPage();
+    }
   },
   categoriesFilter: function (event) {
     if (event.target.classList.value == 'categories__btn') {
@@ -19,10 +21,7 @@ export const handlers = {
     applyFilter(null, searchFormQuery);
   },
   searchClear: function (event) {
-    if (
-      (event.target.classList.value === 'search-form__btn-clear') &
-      (event.type === 'click')
-    ) {
+    if (event.target.classList.value === 'search-form__btn-clear') {
       refs.searchForm.elements.searchValue.value = '';
     }
   },
