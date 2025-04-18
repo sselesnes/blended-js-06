@@ -3,7 +3,7 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import { refs } from './refs';
-import { productsPerPage } from './constants';
+import { productsPerPage } from './helpers';
 
 export function clearProducts() {
   refs.loadMore.style.display = 'none';
@@ -14,19 +14,21 @@ export function renderCategories(data) {
   refs.categories.insertAdjacentHTML('beforeend', markupCategory(data));
 }
 
-export function renderProducts(data, page) {
+export function renderProducts(data, page, searchQuery) {
   refs.loadMore.style.display = 'none';
   refs.products.insertAdjacentHTML('beforeend', markupProducts(data.products));
 
-  console.log(data.total, productsPerPage * page);
+  console.log(productsPerPage * page, data.total);
 
-  // loadmore
-  if (data.total > productsPerPage * page) {
+  // loadmore behavior
+  // dummyjson doesn`t support search pagination
+
+  if (!searchQuery & (data.total > productsPerPage * page)) {
     refs.loadMore.style.display = 'flex';
   } else {
     if (page !== 1) {
       iziToast.info({
-        message: `We're sorry, but you've reached the end of search results.`,
+        message: `You've reached the end of search results.`,
         position: 'bottomCenter',
         timeout: 2000,
       });

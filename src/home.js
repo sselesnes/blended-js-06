@@ -8,3 +8,4 @@ window.addEventListener(`DOMContentLoaded`, loadPage);
 refs.loadMore.addEventListener('click', handlers.loadMore);
 refs.categories.addEventListener('click', handlers.categoriesFilter);
 refs.searchForm.addEventListener('submit', handlers.searchProduct);
+refs.searchForm.addEventListener('click', handlers.searchClear);

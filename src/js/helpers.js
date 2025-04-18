@@ -7,8 +7,10 @@ import {
   clearProducts,
 } from './render-function';
 
-let page = 16;
+export const productsPerPage = 12;
+let page = 1;
 let category = 'all';
+let searchQuery = null;
 
 export async function loadPage() {
   try {
@@ -22,8 +24,9 @@ export async function loadPage() {
 
 async function handleProducts() {
   try {
-    const products = await getProducts(page, category);
-    renderProducts(products, page);
+    const products = await getProducts(page, category, searchQuery);
+    renderProducts(products, page, searchQuery);
+    searchQuery = null;
   } catch (error) {
     console.log(error);
   }
@@ -36,6 +39,14 @@ export function nextProductsPage() {
 
 export function applyCategory(categorySelected) {
   category = categorySelected;
+  page = 1;
+  clearProducts();
+  handleProducts();
+}
+
+export function applyQuery(searchFormQuery) {
+  searchQuery = searchFormQuery;
+  category = 'all';
   page = 1;
   clearProducts();
   handleProducts();
