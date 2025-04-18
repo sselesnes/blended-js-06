@@ -1,7 +1,8 @@
 // Функції, які передаються колбеками в addEventListners
 
-import { nextProductsPage, applyFilter } from './helpers';
 import { refs } from './refs';
+import { nextProductsPage, applyFilter } from './helpers';
+import { modalCard } from './modal';
 
 export const handlers = {
   loadMore: function (event) {
@@ -31,10 +32,7 @@ export const handlers = {
       while (!targetElement.classList.contains('products__item')) {
         targetElement = targetElement.parentElement;
       }
-      const productId = targetElement.dataset.id;
-      console.log('ID товару:', productId);
-
-      refs.modal.classList.add('modal--is-open');
+      modalCard(targetElement.dataset.id);
     }
   },
 };

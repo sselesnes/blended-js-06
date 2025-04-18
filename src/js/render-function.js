@@ -65,3 +65,9 @@ function markupProducts(data) {
     )
     .join('');
 }
+
+export function renderCard(data) {}
+
+function markupCard(data) {
+  return '';
+}
