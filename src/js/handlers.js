@@ -25,4 +25,16 @@ export const handlers = {
       refs.searchForm.elements.searchValue.value = '';
     }
   },
+  productCard: function (event) {
+    let targetElement = event.target;
+    if (targetElement.classList.value !== 'products') {
+      while (!targetElement.classList.contains('products__item')) {
+        targetElement = targetElement.parentElement;
+      }
+      const productId = targetElement.dataset.id;
+      console.log('ID товару:', productId);
+
+      refs.modal.classList.add('modal--is-open');
+    }
+  },
 };

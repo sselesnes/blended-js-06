@@ -6,4 +6,5 @@ export const refs = {
   loadMore: document.querySelector('.load-more'),
   searchForm: document.querySelector('.search-form'),
   notFound: document.querySelector('.not-found'),
+  modal: document.querySelector('.modal'),
 };
