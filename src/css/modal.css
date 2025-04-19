@@ -23,7 +23,6 @@
   max-width: 800px;
   max-height: 90vh;
   padding: 2rem;
-
   background: white;
   border-radius: 12px;
   transform: scale(0.95);
@@ -37,6 +36,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
+  align-items: center;
 }
 
 .modal-product__img {
@@ -44,7 +44,8 @@
   height: 400px;
   object-fit: contain;
   border-radius: 8px;
-  background: #f8f9fa;
+  background: white;
+  /* background: #f8f9fa; */
 }
 
 .modal-product__content {

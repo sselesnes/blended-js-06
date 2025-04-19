@@ -2,7 +2,7 @@
 
 import { refs } from './refs';
 import { nextProductsPage, applyFilter } from './helpers';
-import { modalCard } from './modal';
+import { modalOpen } from './modal';
 
 export const handlers = {
   loadMore: function (event) {
@@ -32,7 +32,7 @@ export const handlers = {
       while (!targetElement.classList.contains('products__item')) {
         targetElement = targetElement.parentElement;
       }
-      modalCard(targetElement.dataset.id);
+      modalOpen(targetElement.dataset.id);
     }
   },
 };
