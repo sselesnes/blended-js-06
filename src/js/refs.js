@@ -7,4 +7,5 @@ export const refs = {
   searchForm: document.querySelector('.search-form'),
   notFound: document.querySelector('.not-found'),
   modal: document.querySelector('.modal'),
+  modalProduct: document.querySelector('.modal .modal-product'),
 };
