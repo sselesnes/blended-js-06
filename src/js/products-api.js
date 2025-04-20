@@ -26,7 +26,6 @@ export async function getProducts(page, category, searchQuery) {
 }
 
 export async function getProduct(productId) {
-  console.log(productId);
   const { data } = await axios.get(
     `https://dummyjson.com/products/${productId}`
   );

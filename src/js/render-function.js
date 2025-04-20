@@ -5,13 +5,23 @@ import 'izitoast/dist/css/iziToast.min.css';
 import { refs } from './refs';
 import { productsPerPage } from './helpers';
 
-export function clearProducts() {
+export function clearProducts(category, categorySelected) {
+  refs.categories.querySelectorAll('.categories__btn').forEach(button => {
+    const buttonText = button.textContent;
+    if (buttonText === category) {
+      button.classList.remove('categories__btn--active');
+    }
+    if (buttonText === categorySelected) {
+      button.classList.add('categories__btn--active');
+    }
+  });
   refs.loadMore.style.display = 'none';
   refs.products.innerHTML = '';
 }
 
 export function renderCategories(data) {
   refs.categories.insertAdjacentHTML('beforeend', markupCategory(data));
+  clearProducts('all', 'all');
 }
 
 export function renderProducts(data, page, searchQuery) {
@@ -40,7 +50,6 @@ export function renderProducts(data, page, searchQuery) {
 }
 
 export function renderCard(data) {
-  console.log(data);
   refs.modalProduct.innerHTML = markupCard(data);
 }
 

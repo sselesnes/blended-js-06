@@ -1,5 +1,6 @@
 //Допоміжні функції
 
+import { refs } from './refs';
 import { getCategories, getProducts } from './products-api';
 import {
   renderCategories,
@@ -38,15 +39,15 @@ export function nextProductsPage() {
 }
 
 export function applyFilter(categorySelected, searchFormQuery) {
+  page = 1;
   if (!searchFormQuery & (categorySelected == category)) {
     return;
   }
   if (searchFormQuery) {
     searchQuery = searchFormQuery;
-    category = 'all';
+    categorySelected = 'empty';
   }
-  page = 1;
+  clearProducts(category, categorySelected);
   category = categorySelected;
-  clearProducts();
   handleProducts();
 }

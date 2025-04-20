@@ -35,7 +35,6 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* grid-template-rows: auto; */
   gap: 2rem;
 }
 
@@ -60,9 +59,7 @@
 .modal-product__content div:last-child {
   display: flex;
   flex-direction: column;
-  padding-left: 4rem;
-
-  /* padding-left: 2rem; */
+  padding-left: 3rem;
 }
 
 .modal-product__title {
@@ -186,7 +183,6 @@
 .modal-product__buy-btn,
 .modal-product__btn--cart {
   background: #ff6b0a;
-  /* background: #ffb585; */
   color: white;
 }
 

@@ -10,6 +10,7 @@ export async function modalOpen(productId) {
     renderCard(product);
     refs.modal.classList.add('modal--is-open');
     refs.modalCloseBtn.addEventListener('click', modalClose);
+    refs.body.addEventListener('click', modalOutside);
   } catch (error) {
     console.log(error);
   }
@@ -18,4 +19,11 @@ export async function modalOpen(productId) {
 function modalClose() {
   refs.modal.classList.remove('modal--is-open');
   refs.modalCloseBtn.removeEventListener('click', modalClose);
+  refs.body.removeEventListener('click', modalOutside);
+}
+
+function modalOutside(event) {
+  if (event.target === refs.modal) {
+    modalClose();
+  }
 }
