@@ -105,7 +105,6 @@
 }
 
 .modal-product__price {
-  /* margin: 1rem 0; */
   text-align: center;
   color: #ff6b0a;
   font-size: 1.5rem;
@@ -114,8 +113,8 @@
 
 .modal__close-btn {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 0.75rem;
 
   background: none;
   border: none;
