@@ -17,7 +17,7 @@ export const LS = {
     }
     localStorage.setItem(
       this.prefix + productId,
-      JSON.stringify({ wish: wish, qty: qty, timestamp: Date.now() })
+      JSON.stringify({ qty: qty, wish: wish, timestamp: Date.now() })
     );
   },
   get: function (productId) {
@@ -26,18 +26,29 @@ export const LS = {
   remove: function (productId) {
     localStorage.removeItem(productId);
   },
+  // getKeys: function () {
+  //   return (
+  //     Object.entries(localStorage)
+  //       .filter(([key]) => key.startsWith(this.prefix))
+  //       .map(([key, value]) => [
+  //         Number(key.substring(this.prefix.length)),
+  //         JSON.parse(value).wish,
+  //         JSON.parse(value).qty,
+  //         JSON.parse(value).timestamp,
+  //       ])
+  //       // sorting by timestamp
+  //       .sort((a, b) => a[3] - b[3])
+  //   );
+  // },
+
   getKeys: function () {
-    return (
-      Object.entries(localStorage)
-        .filter(([key]) => key.startsWith(this.prefix))
-        .map(([key, value]) => [
-          key,
-          JSON.parse(value).wish,
-          JSON.parse(value).qty,
-          JSON.parse(value).timestamp,
-        ])
-        // sorting by timestamp
-        .sort((a, b) => a[3] - b[3])
-    );
+    return Object.entries(localStorage)
+      .filter(([key]) => key.startsWith(this.prefix))
+      .map(([key, value]) => {
+        const productId = Number(key.substring(this.prefix.length));
+        const { wish, qty, timestamp } = JSON.parse(value);
+        return { productId, qty, wish, timestamp }; //
+      })
+      .sort((a, b) => a.timestamp - b.timestamp); //
   },
 };

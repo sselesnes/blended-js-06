@@ -4,6 +4,7 @@ import { refs } from './refs';
 import { LS } from './storage';
 import { getProduct } from './products-api';
 import { renderCard } from './render-function';
+import { updateHeader } from './helpers';
 let modalClickListener;
 
 export async function modalOpen(productId) {
@@ -44,4 +45,5 @@ function modalClick(productId, event) {
   if (event.target.classList.contains('modal-product__buy-btn')) {
     console.log('Buy It Now', productId);
   }
+  updateHeader();
 }

@@ -1,6 +1,7 @@
 //Допоміжні функції
 
 import { refs } from './refs';
+import { LS } from './storage';
 import { getCategories, getProducts } from './products-api';
 import {
   renderCategories,
@@ -14,6 +15,7 @@ let category = 'all';
 let searchQuery = null;
 
 export async function loadPage() {
+  updateHeader();
   try {
     const categories = await getCategories();
     renderCategories(['all', ...categories]);
@@ -50,4 +52,17 @@ export function applyFilter(categorySelected, searchFormQuery) {
   clearProducts(category, categorySelected);
   category = categorySelected;
   handleProducts();
+}
+
+export function updateHeader() {
+  let cart = 0;
+  let wish = 0;
+  LS.getKeys().forEach(item => {
+    console.log(item);
+    item.qty && cart++;
+    item.wish && wish++;
+  });
+  console.log(cart, wish);
+  refs.body.querySelector('[data-cart-count]').textContent = cart;
+  refs.body.querySelector('[data-wishlist-count]').textContent = wish;
 }
