@@ -1,5 +1,5 @@
 //Допоміжні функції
-// Functions from home.js moved to helpers.js due to a conflict with handlers.js during initialization (сyclic dependencies)
+// Functions from home.js moved to helpers.js due to a conflict with handlers.js during global initialization (сyclic dependencies)
 
 import { getProducts } from './products-api';
 import { renderProducts, clearProducts } from './render-function';

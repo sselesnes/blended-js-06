@@ -19,6 +19,11 @@ export const handlers = {
     event.preventDefault();
     const searchFormQuery = event.target.elements.searchValue.value;
     event.target.elements.searchValue.value = '';
+    // console.log(window.location.pathname);
+    // if (window.location.pathname !== '/')
+    //   window.location.pathname = `/q=${searchFormQuery}`;
+    // console.log(urlHandler(get));
+    // urlHandler.set(searchFormQuery);
     applyFilter(null, searchFormQuery);
   },
   searchClear: function (event) {
@@ -34,5 +39,32 @@ export const handlers = {
       }
       modalOpen(targetElement.dataset.id);
     }
+  },
+};
+
+export const urlHandler = {
+  params: null,
+
+  init: function () {
+    this.params = new URL(window.location.pathname);
+  },
+
+  get: function () {
+    return this.params.get('');
+  },
+
+  set: function (query) {
+    this.params.set(`/q=${query}`);
+    this.update();
+  },
+
+  update: function () {
+    this.url.search = this.params.toString();
+    window.history.pushState({}, '', `${this.url}`);
+  },
+
+  remove: function () {
+    this.params.delete('q');
+    this.update();
   },
 };
