@@ -2,9 +2,9 @@
 
 import { refs } from './refs';
 import { LS } from './storage';
+import { productsPerPage } from './helpers';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import { productsPerPage } from './helpers';
 
 export function clearProducts(category, categorySelected) {
   refs.categories.querySelectorAll('.categories__btn').forEach(button => {

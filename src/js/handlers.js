@@ -1,8 +1,8 @@
 // Функції, які передаються колбеками в addEventListners
 
 import { refs } from './refs';
-import { nextProductsPage, applyFilter } from './helpers';
 import { modalOpen } from './modal';
+import { nextProductsPage, applyFilter } from './helpers';
 
 export const handlers = {
   loadMore: function (event) {

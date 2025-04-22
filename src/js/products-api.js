@@ -1,9 +1,9 @@
 // Функції для роботи з бекендом
 
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
 import axios from 'axios';
 import { productsPerPage } from './helpers';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 export async function getCategories(category) {
   try {
