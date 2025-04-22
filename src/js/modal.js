@@ -40,21 +40,29 @@ function modalClick(productId, event) {
 
   const productStorageInfo = LS.get(productId);
   if (event.target.classList.contains(cartBtn)) {
-    //   if (!productStorageInfo) {
-    //     if (!productStorageInfo.qty) {
-    LS.add(productId, 'cart');
+    if (productStorageInfo) {
+      if (!productStorageInfo.qty) {
+        LS.add(productId, productStorageInfo.wish ? 'wish' : 'cart', 1);
+      } else {
+        LS.add(productId, productStorageInfo.wish ? 'wish' : 'cart', 0);
+      }
+    } else {
+      LS.add(productId, 'cart', 1);
+    }
     actionBtnsPrepare(productId);
-    // }
-    // }
   }
 
   if (event.target.classList.contains(wishlistBtn)) {
-    // if (!productStorageInfo) {
-    //   if (!productStorageInfo.wish) {
-    LS.add(productId, 'wish');
+    if (productStorageInfo) {
+      if (!productStorageInfo.wish) {
+        LS.add(productId, 'wish', productStorageInfo.qty);
+      } else {
+        LS.add(productId, 'none', productStorageInfo.qty);
+      }
+    } else {
+      LS.add(productId, 'wish', 0);
+    }
     actionBtnsPrepare(productId);
-    // }
-    // }
   }
 
   if (event.target.classList.contains('modal-product__buy-btn')) {

@@ -14,12 +14,8 @@ export const LS = {
   },
 
   add: function (productId, location, qty) {
-    console.log(productId, location);
     let wish = location === 'wish' ? 1 : 0;
-    // call add with location 'cart' and empty qty sets qty=1
-    qty = location === 'cart' && !qty ? 1 : qty ?? 0;
-
-    const exists = JSON.parse(this.get(productId));
+    const exists = JSON.parse(this.get(this.prefix + productId));
     if (exists) {
       qty += exists.qty;
       wish |= exists.wish;
