@@ -36,7 +36,6 @@ export function renderProducts(data, page, searchQuery) {
 
   // loadmore behavior
   // dummyjson doesn`t support search pagination
-
   if (!searchQuery & (data.total > productsPerPage * page)) {
     refs.loadMore.style.display = 'flex';
   } else {
@@ -113,7 +112,6 @@ export function updateHeader() {
     item.qty && cart++;
     item.wish && wish++;
   });
-  console.log(cart, wish);
   refs.body.querySelector('[data-cart-count]').textContent = cart;
   refs.body.querySelector('[data-wishlist-count]').textContent = wish;
 }

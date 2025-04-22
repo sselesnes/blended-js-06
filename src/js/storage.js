@@ -1,13 +1,22 @@
 //Робота з localStorage
 
-// ignoring keys that do not belong to our application data (do not start with a prefix)
+// ignoring keys that do not belong to our application data (without prefix)
 
 export const LS = {
   prefix: 'b06-',
 
+  get: function (productId) {
+    return JSON.parse(localStorage.getItem(this.prefix + productId));
+  },
+
+  remove: function (productId) {
+    localStorage.removeItem(this.prefix + productId);
+  },
+
   add: function (productId, location, qty) {
+    console.log(productId, location);
     let wish = location === 'wish' ? 1 : 0;
-    // if location == cart && qty == null {qty=1}
+    // call add with location 'cart' and empty qty sets qty=1
     qty = location === 'cart' && !qty ? 1 : qty ?? 0;
 
     const exists = JSON.parse(this.get(productId));
@@ -20,26 +29,6 @@ export const LS = {
       JSON.stringify({ qty: qty, wish: wish, timestamp: Date.now() })
     );
   },
-  get: function (productId) {
-    return localStorage.getItem(this.prefix + productId);
-  },
-  remove: function (productId) {
-    localStorage.removeItem(productId);
-  },
-  // getKeys: function () {
-  //   return (
-  //     Object.entries(localStorage)
-  //       .filter(([key]) => key.startsWith(this.prefix))
-  //       .map(([key, value]) => [
-  //         Number(key.substring(this.prefix.length)),
-  //         JSON.parse(value).wish,
-  //         JSON.parse(value).qty,
-  //         JSON.parse(value).timestamp,
-  //       ])
-  //       // sorting by timestamp
-  //       .sort((a, b) => a[3] - b[3])
-  //   );
-  // },
 
   getKeys: function () {
     return Object.entries(localStorage)
