@@ -1,13 +1,20 @@
 // Функції для роботи з бекендом
 
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 import axios from 'axios';
 import { productsPerPage } from './helpers';
 
 export async function getCategories(category) {
-  const { data } = await axios.get(
-    'https://dummyjson.com/products/category-list'
-  );
-  return data;
+  try {
+    const { data } = await axios.get(
+      'https://dummyjson.com/products/category-list'
+    );
+    return data;
+  } catch (error) {
+    uiMessage(`Categories fetch: ${error}`);
+    return null;
+  }
 }
 
 export async function getProducts(page, category, searchQuery) {
@@ -21,13 +28,31 @@ export async function getProducts(page, category, searchQuery) {
   if (searchQuery) {
     props = `/search?q=${searchQuery}`;
   }
-  const { data } = await axios.get(`https://dummyjson.com/products${props}`);
-  return data;
+  try {
+    const { data } = await axios.get(`https://dummyjson.com/products${props}`);
+    return data;
+  } catch (error) {
+    uiMessage(`Products fetch: ${error}`);
+    return null;
+  }
 }
 
 export async function getProduct(productId) {
-  const { data } = await axios.get(
-    `https://dummyjson.com/products/${productId}`
-  );
-  return data;
+  try {
+    const { data } = await axios.get(
+      `https://dummyjson.com/products/${productId}`
+    );
+    return data;
+  } catch (error) {
+    uiMessage(`Product ID ${productId} fetch: ${error}`);
+    return null;
+  }
+}
+
+function uiMessage(error) {
+  iziToast.error({
+    message: error,
+    position: 'bottomCenter',
+    timeout: 2000,
+  });
 }

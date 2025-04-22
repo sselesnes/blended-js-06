@@ -3,20 +3,17 @@
 import { refs } from './refs';
 import { LS } from './storage';
 import { getProduct } from './products-api';
-import { renderCard } from './render-function';
-import { updateHeader } from './helpers';
+import { renderCard, updateHeader } from './render-function';
 let modalClickListener;
 
 export async function modalOpen(productId) {
-  try {
-    const product = await getProduct(productId);
+  const product = await getProduct(productId);
+  if (product) {
     renderCard(product);
     refs.modal.classList.add('modal--is-open');
     refs.body.addEventListener('click', modalOutside);
     modalClickListener = modalClick.bind(null, productId);
     refs.modal.addEventListener('click', modalClickListener);
-  } catch (error) {
-    console.log(error);
   }
 }
 

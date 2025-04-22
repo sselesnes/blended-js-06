@@ -1,8 +1,9 @@
 //Функцію для створення, рендеру або видалення розмітки
 
+import { refs } from './refs';
+import { LS } from './storage';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import { refs } from './refs';
 import { productsPerPage } from './helpers';
 
 export function clearProducts(category, categorySelected) {
@@ -102,8 +103,17 @@ function markupCard(data) {
     }</p><button class="modal-product__btn modal-product__buy-btn" type="button">Buy It Now</button>
         </div>
         `;
+  // Зайве - Shipping: Return Policy:
 }
 
-// Зайве
-// Shipping:
-// Return Policy:
+export function updateHeader() {
+  let cart = 0;
+  let wish = 0;
+  LS.getKeys().forEach(item => {
+    item.qty && cart++;
+    item.wish && wish++;
+  });
+  console.log(cart, wish);
+  refs.body.querySelector('[data-cart-count]').textContent = cart;
+  refs.body.querySelector('[data-wishlist-count]').textContent = wish;
+}
