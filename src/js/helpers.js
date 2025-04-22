@@ -1,7 +1,5 @@
 //Допоміжні функції
 
-// import { refs } from './refs';
-// import { LS } from './storage';
 import { getCategories, getProducts } from './products-api';
 import {
   renderCategories,

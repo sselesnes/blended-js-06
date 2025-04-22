@@ -13,7 +13,7 @@ export async function modalOpen(productId) {
   if (product) {
     // dummyjson images Cache-control: public, max-age=0
     renderCard(product);
-    actionBtnsPrepare(productId);
+    actionBtnsText(productId);
     refs.modal.classList.add('modal--is-open');
     refs.body.addEventListener('click', modalOutside);
     modalClickListener = modalClick.bind(null, productId);
@@ -39,6 +39,7 @@ function modalClick(productId, event) {
   }
 
   const productStorageInfo = LS.get(productId);
+  // don't change 'wish' when clicked `add to cart`
   if (event.target.classList.contains(cartBtn)) {
     if (productStorageInfo) {
       if (!productStorageInfo.qty) {
@@ -49,9 +50,10 @@ function modalClick(productId, event) {
     } else {
       LS.add(productId, 'cart', 1);
     }
-    actionBtnsPrepare(productId);
+    actionBtnsText(productId);
   }
 
+  // don't change 'qty' when clicked `add to wishlist`
   if (event.target.classList.contains(wishlistBtn)) {
     if (productStorageInfo) {
       if (!productStorageInfo.wish) {
@@ -62,7 +64,7 @@ function modalClick(productId, event) {
     } else {
       LS.add(productId, 'wish', 0);
     }
-    actionBtnsPrepare(productId);
+    actionBtnsText(productId);
   }
 
   if (event.target.classList.contains('modal-product__buy-btn')) {
@@ -71,7 +73,7 @@ function modalClick(productId, event) {
   updateHeader();
 }
 
-function actionBtnsPrepare(productId) {
+function actionBtnsText(productId) {
   const productStorageInfo = LS.get(productId);
   if (productStorageInfo) {
     if (productStorageInfo.wish) {

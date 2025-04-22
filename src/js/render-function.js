@@ -26,7 +26,8 @@ export function renderCategories(data) {
 }
 
 export function renderProducts(data, page, searchQuery) {
-  refs.loadMore.style.display = 'none';
+  // no loadmore in the wish list
+  refs.loadmore && (refs.loadMore.style.display = 'none');
   refs.products.insertAdjacentHTML('beforeend', markupProducts(data.products));
 
   if (!data.total) refs.notFound.classList.add('not-found--visible');
@@ -37,7 +38,8 @@ export function renderProducts(data, page, searchQuery) {
   // loadmore behavior
   // dummyjson doesn`t support search pagination
   if (!searchQuery & (data.total > productsPerPage * page)) {
-    refs.loadMore.style.display = 'flex';
+    // no loadmore in the wish list
+    refs.loadmore && (refs.loadMore.style.display = 'flex');
   } else {
     if (page !== 1) {
       iziToast.info({
