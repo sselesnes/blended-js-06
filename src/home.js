@@ -14,7 +14,8 @@ export async function initHome() {
     if (categories) {
       renderCategories(['all', ...categories]);
       const searchQuery = urlHandler.get();
-      if (searchQuery !== '/') applyFilter(null, searchQuery);
+      console.log(searchQuery);
+      if (!searchQuery.startsWith('/')) applyFilter(null, searchQuery);
       handleProducts();
     }
   } catch (error) {
