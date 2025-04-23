@@ -122,3 +122,10 @@ export function updateOrderSummary(items, total) {
   refs.orderSummary.querySelector('[data-count]').textContent = items;
   refs.orderSummary.querySelector('[data-price]').textContent = `$${total}`;
 }
+
+export function clearWishCart() {
+  updateHeader();
+  updateOrderSummary(0, 0);
+  refs.products.innerHTML = '';
+  refs.notFound.classList.add('not-found--visible');
+}
