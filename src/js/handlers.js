@@ -51,9 +51,6 @@ export const urlHandler = {
   },
   clear: function () {
     let url = window.location.href;
-    window.location.href = url.substring(
-      0,
-      url.indexOf('/', url.indexOf('/') + 2)
-    );
+    window.location.href = url.slice(0, url.lastIndexOf('/') + 1);
   },
 };
