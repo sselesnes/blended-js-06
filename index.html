@@ -5,8 +5,11 @@
     <link rel="icon" type="image/svg+xml" href="/blended-js-06/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home page</title>
-    <script type="module" crossorigin src="/blended-js-06/assets/styles-BK7AYJoX.js"></script>
-    <link rel="stylesheet" crossorigin href="/blended-js-06/assets/styles-CwHyMCDG.css">
+    <script type="module" crossorigin src="/blended-js-06/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/blended-js-06/assets/vendor-4yCzdkXl.js">
+    <link rel="modulepreload" crossorigin href="/blended-js-06/assets/handlers-CiVvIRXa.js">
+    <link rel="stylesheet" crossorigin href="/blended-js-06/assets/handlers-3rGRwKuX.css">
+    <link rel="stylesheet" crossorigin href="/blended-js-06/assets/vendor-DnveWo0P.css">
   </head>
   <body>
     <header class="header">
@@ -64,6 +67,11 @@
         <div class="container">
           <ul class="categories"></ul>
           <ul class="products"></ul>
+          <div class="load-more">
+            <button class="search-form__btn load-more-btn" type="submit">
+              Load more
+            </button>
+          </div>
           <div class="not-found">
             <div class="not-found__icon">
               <svg
@@ -94,17 +102,6 @@
   <div class="modal__content">
     <button class="modal__close-btn" type="button"></button>
     <div class="modal-product"></div>
-    <div class="modal-product__actions">
-      <button
-        class="modal-product__btn modal-product__btn--wishlist"
-        type="button"
-      >
-        Add to Wishlist
-      </button>
-      <button class="modal-product__btn modal-product__btn--cart" type="button">
-        Add to Cart
-      </button>
-    </div>
   </div>
 </div>
 
