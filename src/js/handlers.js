@@ -50,6 +50,10 @@ export const urlHandler = {
     return window.location.pathname;
   },
   clear: function () {
-    window.location.pathname = '/';
+    let url = window.location.href;
+    window.location.href = url.substring(
+      0,
+      url.indexOf('/', url.indexOf('/') + 2)
+    );
   },
 };
