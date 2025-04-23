@@ -1,5 +1,6 @@
 // Функції, які передаються колбеками в addEventListners
 
+import { LS } from './storage';
 import { refs } from './refs';
 import { modalOpen } from './modal';
 import { nextProductsPage, applyFilter } from './helpers';
@@ -19,8 +20,12 @@ export const handlers = {
     event.preventDefault();
     const searchFormQuery = event.target.elements.searchValue.value;
     event.target.elements.searchValue.value = '';
-    if (urlHandler.get() !== '/') {
-      urlHandler.set(searchFormQuery);
+
+    // if the search event does not come from home/index.html
+    const urlPath = urlHandler.get();
+    if (urlPath !== '/' && urlPath !== '/index.html') {
+      LS.add('search', 'none', searchFormQuery);
+      urlHandler.clear();
     }
     applyFilter(null, searchFormQuery);
   },
@@ -42,12 +47,9 @@ export const handlers = {
 
 export const urlHandler = {
   get: function () {
-    const currentURL = window.location.pathname;
-    if (currentURL.startsWith('/q=')) return currentURL.substring(3);
-    return currentURL;
+    return window.location.pathname;
   },
-  set: function (newPathname) {
-    const newURL = `/q=${newPathname}`;
-    window.location.href = newURL;
+  clear: function () {
+    window.location.pathname = '';
   },
 };

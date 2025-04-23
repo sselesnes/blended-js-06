@@ -4,10 +4,10 @@
 import { getProducts } from './products-api';
 import { renderProducts, clearProducts } from './render-function';
 
-let page = 1;
 export const productsPerPage = 12;
+export let searchQuery = null;
 let category = 'all';
-let searchQuery = null;
+let page = 1;
 
 export function nextProductsPage() {
   page++;
