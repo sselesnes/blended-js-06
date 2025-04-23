@@ -19,11 +19,9 @@ export const handlers = {
     event.preventDefault();
     const searchFormQuery = event.target.elements.searchValue.value;
     event.target.elements.searchValue.value = '';
-    // console.log(window.location.pathname);
-    // if (window.location.pathname !== '/')
-    //   window.location.pathname = `/q=${searchFormQuery}`;
-    // console.log(urlHandler(get));
-    // urlHandler.set(searchFormQuery);
+    if (urlHandler.get() !== '/') {
+      urlHandler.set(searchFormQuery);
+    }
     applyFilter(null, searchFormQuery);
   },
   searchClear: function (event) {
@@ -43,28 +41,13 @@ export const handlers = {
 };
 
 export const urlHandler = {
-  params: null,
-
-  init: function () {
-    this.params = new URL(window.location.pathname);
-  },
-
   get: function () {
-    return this.params.get('');
+    const currentURL = window.location.pathname;
+    if (currentURL.startsWith('/q=')) return currentURL.substring(3);
+    return currentURL;
   },
-
-  set: function (query) {
-    this.params.set(`/q=${query}`);
-    this.update();
-  },
-
-  update: function () {
-    this.url.search = this.params.toString();
-    window.history.pushState({}, '', `${this.url}`);
-  },
-
-  remove: function () {
-    this.params.delete('q');
-    this.update();
+  set: function (newPathname) {
+    const newURL = `/q=${newPathname}`;
+    window.location.href = newURL;
   },
 };

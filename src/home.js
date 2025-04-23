@@ -9,14 +9,12 @@ import { applyFilter } from './js/helpers';
 
 export async function initHome() {
   updateHeader();
-  //   urlHandler.init();
   try {
     const categories = await getCategories();
     if (categories) {
       renderCategories(['all', ...categories]);
-      //   const searchFormQuery = urlHandler.get();
-      //   console.log(searchFormQuery);
-      //   if (searchFormQuery) applyFilter(null, searchFormQuery);
+      const searchQuery = urlHandler.get();
+      if (searchQuery !== '/') applyFilter(null, searchQuery);
       handleProducts();
     }
   } catch (error) {
