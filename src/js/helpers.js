@@ -3,6 +3,7 @@
 
 import { getProducts } from './products-api';
 import { renderProducts, clearProducts } from './render-function';
+// import { cartProcessingEnd } from '../cart';
 
 export const productsPerPage = 12;
 export let searchQuery = null;

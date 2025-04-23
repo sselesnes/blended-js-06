@@ -9,4 +9,5 @@ export const refs = {
   modalProduct: document.querySelector('.modal-product'),
   modal: document.querySelector('.modal'),
   body: document.querySelector('body'),
+  orderSummary: document.querySelector('.cart-summary__inner'),
 };

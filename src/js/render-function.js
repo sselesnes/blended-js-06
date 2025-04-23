@@ -111,9 +111,14 @@ export function updateHeader() {
   let cart = 0;
   let wish = 0;
   LS.getKeys().forEach(item => {
-    item.qty && cart++;
+    item.productId && item.qty && cart++;
     item.wish && wish++;
   });
   refs.body.querySelector('[data-cart-count]').textContent = cart;
   refs.body.querySelector('[data-wishlist-count]').textContent = wish;
+}
+
+export function updateOrderSummary(items, total) {
+  refs.orderSummary.querySelector('[data-count]').textContent = items;
+  refs.orderSummary.querySelector('[data-price]').textContent = `$${total}`;
 }

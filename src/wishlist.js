@@ -10,7 +10,6 @@ async function initWishlist() {
   updateHeader();
   // dummyjson like data for renderProducts
   const data = {
-    data: [],
     total: 0,
   };
 
