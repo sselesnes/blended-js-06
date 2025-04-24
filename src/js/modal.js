@@ -6,12 +6,15 @@ import { refs } from './refs';
 import { LS } from './storage';
 import { getProduct } from './products-api';
 import { renderCard, updateHeader } from './render-function';
+// import { initWishlist } from '../wishlist';
 
 let modalClickListener;
+let modalOrigin;
 const wishlistBtn = 'modal-product__btn--wishlist';
 const cartBtn = 'modal-product__btn--cart';
 
-export async function modalOpen(productId) {
+export async function modalOpen(productId, origin) {
+  modalOrigin = origin;
   const product = await getProduct(productId);
   if (product) {
     // dummyjson images Cache-control: public, max-age=0
@@ -40,7 +43,7 @@ function modalClick(productId, event) {
   if (event.target.classList.contains('modal__close-btn')) {
     modalClose();
   }
-
+  console.log(modalOrigin);
   const productStorageInfo = LS.get(productId);
   // don't change 'wish' when clicked `add to cart`
   if (event.target.classList.contains(cartBtn)) {
@@ -74,6 +77,11 @@ function modalClick(productId, event) {
     buyItNowProcessing(productId);
   }
   updateHeader();
+  if (modalOrigin == 'wishlist') {
+    // initWishlist();
+  }
+  if (modalOrigin == 'cart') {
+  }
 }
 
 function actionBtnsText(productId) {

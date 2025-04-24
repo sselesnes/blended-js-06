@@ -5,7 +5,8 @@ import { refs } from './refs';
 import { modalOpen } from './modal';
 import { nextProductsPage, applyFilter } from './helpers';
 
-export const handlers = {
+// export
+const handlers = {
   loadMore: function (event) {
     if (event.target.classList.contains('load-more-btn')) {
       nextProductsPage();
@@ -40,11 +41,10 @@ export const handlers = {
       while (!targetElement.classList.contains('products__item')) {
         targetElement = targetElement.parentElement;
       }
-      modalOpen(targetElement.dataset.id);
+      modalOpen(targetElement.dataset.id, targetElement.dataset.origin);
     }
   },
 };
-
 export const urlHandler = {
   get: function () {
     return window.location.pathname;
