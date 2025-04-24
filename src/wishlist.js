@@ -15,7 +15,7 @@ async function initWishlist() {
 
   data.products = await wishListProducts();
   data.total = data.products.length;
-  renderProducts(data, 1);
+  renderProducts(data, 1, null, 'wishlist');
 }
 
 async function wishListProducts() {

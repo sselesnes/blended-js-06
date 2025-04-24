@@ -27,7 +27,7 @@ async function initCart() {
   data.total = data.products.length;
   data.sum = data.products.reduce((total, product) => total + product.price, 0);
   updateOrderSummary(data.total, data.sum.toFixed(2));
-  renderProducts(data, 1);
+  renderProducts(data, 1, null, 'cart');
 }
 
 async function cartProducts() {

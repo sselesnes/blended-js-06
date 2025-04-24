@@ -25,11 +25,14 @@ export function renderCategories(data) {
   clearProducts('all', 'all');
 }
 
-export function renderProducts(data, page, searchQuery) {
+export function renderProducts(data, page, searchQuery, origin) {
   // loadMore behavior
   // no loadmore in the wishlist or cart
   refs.loadMore && (refs.loadMore.style.display = 'none');
-  refs.products.insertAdjacentHTML('beforeend', markupProducts(data.products));
+  refs.products.insertAdjacentHTML(
+    'beforeend',
+    markupProducts(data.products, origin)
+  );
 
   if (!data.total) refs.notFound.classList.add('not-found--visible');
   else {
@@ -65,11 +68,11 @@ function markupCategory(data) {
     .join('');
 }
 
-function markupProducts(data) {
+function markupProducts(data, origin) {
   return data
     .map(
       product =>
-        `<li class="products__item" data-id="${product.id}">
+        `<li class="products__item" data-id='${product.id}' data-origin='${origin}'>
             <img class="products__image" src=${product.thumbnail} alt=${product.description}/>
             <p class="products__title">${product.title}</p>
             <p class="products__brand"><span class="products__brand--bold">Brand: ${product.brand}</span></p>
