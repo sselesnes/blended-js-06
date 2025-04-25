@@ -25,21 +25,24 @@ export function renderCategories(data) {
   clearProducts('all', 'all');
 }
 
-export function renderProducts(data, page, searchQuery) {
-  // no loadmore in the wish list
-  refs.loadmore && (refs.loadMore.style.display = 'none');
-  refs.products.insertAdjacentHTML('beforeend', markupProducts(data.products));
+export function renderProducts(data, page, searchQuery, origin) {
+  // loadMore behavior
+  // no loadmore in the wishlist or cart
+  refs.loadMore && (refs.loadMore.style.display = 'none');
+  refs.products.insertAdjacentHTML(
+    'beforeend',
+    markupProducts(data.products, origin)
+  );
 
   if (!data.total) refs.notFound.classList.add('not-found--visible');
   else {
     refs.notFound.classList.remove('not-found--visible');
   }
 
-  // loadmore behavior
-  // dummyjson doesn`t support search pagination
+  // pagination in search requests is not supported by DummyJSON
   if (!searchQuery & (data.total > productsPerPage * page)) {
-    // no loadmore in the wish list
-    refs.loadmore && (refs.loadMore.style.display = 'flex');
+    // no loadmore in the wishlist or cart
+    refs.loadMore && (refs.loadMore.style.display = 'flex');
   } else {
     if (page !== 1) {
       iziToast.info({
@@ -65,11 +68,11 @@ function markupCategory(data) {
     .join('');
 }
 
-function markupProducts(data) {
+function markupProducts(data, origin) {
   return data
     .map(
       product =>
-        `<li class="products__item" data-id="${product.id}">
+        `<li class="products__item" data-id='${product.id}' data-origin='${origin}'>
             <img class="products__image" src=${product.thumbnail} alt=${product.description}/>
             <p class="products__title">${product.title}</p>
             <p class="products__brand"><span class="products__brand--bold">Brand: ${product.brand}</span></p>
@@ -121,4 +124,11 @@ export function updateHeader() {
 export function updateOrderSummary(items, total) {
   refs.orderSummary.querySelector('[data-count]').textContent = items;
   refs.orderSummary.querySelector('[data-price]').textContent = `$${total}`;
+}
+
+export function clearWishCart() {
+  updateHeader();
+  updateOrderSummary(0, 0);
+  refs.products.innerHTML = '';
+  refs.notFound.classList.add('not-found--visible');
 }

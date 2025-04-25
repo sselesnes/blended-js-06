@@ -7,6 +7,7 @@ import { refs } from './js/refs';
 import { handlers } from './js/handlers';
 import { getProduct } from './js/products-api';
 import {
+  clearWishCart,
   renderProducts,
   updateHeader,
   updateOrderSummary,
@@ -14,7 +15,7 @@ import {
 
 // dummyjson like data for renderProducts
 
-const cart = LS.getKeys().filter(product => product.qty);
+let cart = LS.getKeys().filter(product => product.qty);
 
 async function initCart() {
   const data = {
@@ -26,7 +27,7 @@ async function initCart() {
   data.total = data.products.length;
   data.sum = data.products.reduce((total, product) => total + product.price, 0);
   updateOrderSummary(data.total, data.sum.toFixed(2));
-  renderProducts(data, 1);
+  renderProducts(data, 1, null, 'cart');
 }
 
 async function cartProducts() {
@@ -42,16 +43,20 @@ async function cartProducts() {
 }
 
 export function cartProcessing() {
-  iziToast.info({
-    message: `Successful purchase of products`,
-    position: 'bottomCenter',
-    timeout: 2000,
-  });
+  if (cart.length) {
+    iziToast.info({
+      message: `Successful purchase of products`,
+      position: 'bottomCenter',
+      timeout: 2000,
+    });
 
-  // cleaning LS products qty
-  cart.forEach(product => {
-    LS.add(product.productId, product.wish, 0);
-  });
+    // cleaning LS products qty + wish
+    cart.forEach(product => {
+      LS.remove(product.productId);
+      clearWishCart();
+      cart = [];
+    });
+  }
 }
 
 refs.orderSummary

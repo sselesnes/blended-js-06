@@ -18,7 +18,7 @@ export function nextProductsPage() {
 export async function handleProducts() {
   const products = await getProducts(page, category, searchQuery);
   if (products) {
-    renderProducts(products, page, searchQuery);
+    renderProducts(products, page, searchQuery, 'home');
     searchQuery = null;
   }
 }
